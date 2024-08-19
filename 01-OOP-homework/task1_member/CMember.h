@@ -16,5 +16,8 @@ public:
 	~Member();
 
 	friend ostream& operator<<(ostream& os, const Member& m);
+
+	string getName() const;
+	int getAge() const;
 };
 

@@ -1,5 +1,6 @@
 
 #include "CMember.h"
+#include "CMemberList.h"
 
 #include <iostream>
 using namespace std;
@@ -14,6 +15,13 @@ int main()
 	for (int i = 0; i < 5; i++)
 	{
 		cout << newCommers[i] << endl;
+	}
+
+	string name[5] = { "Zhang San", "Li Si", "Wang Wu", "Zhao Liu", "Pin Yin" };
+	MemberList list(newCommers, 5);
+	for (int i = 0; i < 5; i++)
+	{
+		cout << list[name[i]] << endl;
 	}
 	return 0;
 }

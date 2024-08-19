@@ -21,9 +21,15 @@
     <ClCompile Include="CMember.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CMemberList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMember.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMemberList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

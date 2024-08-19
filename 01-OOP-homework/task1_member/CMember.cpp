@@ -9,8 +9,25 @@ Member::~Member()
 {
 }
 
-std::ostream& operator<<(std::ostream& os, const Member& m)
+ostream& operator<<(ostream& os, const Member& m)
 {
-	os << "Name: " << m.m_name << ", Age: " << m.m_age;
+	if (m.m_age == -1)
+	{
+		os << "";
+	}
+	else
+	{
+		os << "Name: " << m.m_name << ", Age: " << m.m_age;
+	}
 	return os;
+}
+
+string Member::getName() const
+{
+	return m_name;
+}
+
+int Member::getAge() const
+{
+	return m_age;
 }
