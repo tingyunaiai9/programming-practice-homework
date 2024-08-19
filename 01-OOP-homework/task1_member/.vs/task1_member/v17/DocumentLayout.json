@@ -9,6 +9,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{6243C16E-56C1-4E63-956D-2A06B850193E}|task1_member.vcxproj|E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\MemberMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6243C16E-56C1-4E63-956D-2A06B850193E}|task1_member.vcxproj|solutionrelative:MemberMain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6243C16E-56C1-4E63-956D-2A06B850193E}|task1_member.vcxproj|E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\CMember.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6243C16E-56C1-4E63-956D-2A06B850193E}|task1_member.vcxproj|solutionrelative:CMember.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,13 +34,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CMember.cpp",
+              "DocumentMoniker": "E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\CMember.cpp",
+              "RelativeDocumentMoniker": "CMember.cpp",
+              "ToolTip": "E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\CMember.cpp",
+              "RelativeToolTip": "CMember.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-19T06:51:14.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CMember.h",
               "DocumentMoniker": "E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\CMember.h",
               "RelativeDocumentMoniker": "CMember.h",
               "ToolTip": "E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\CMember.h",
               "RelativeToolTip": "CMember.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAIwAsAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-08-19T06:35:54.836Z",
               "EditorCaption": ""
@@ -49,7 +66,7 @@
               "RelativeDocumentMoniker": "MemberMain.cpp",
               "ToolTip": "E:\\Project\\cpp\\ProgrammingPractice\\Homework\\01-OOP-homework\\task1_member\\MemberMain.cpp",
               "RelativeToolTip": "MemberMain.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-19T06:30:43.587Z",
               "EditorCaption": ""
