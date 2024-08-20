@@ -1,8 +1,9 @@
 #include "pch.h"
 
 #include "CGame.h"
+#include "CFormula.h"
 
-int main()
+void play24()
 {
 	CGame* pGame = NULL;
 	pGame = new CGame();
@@ -16,6 +17,29 @@ int main()
 	{
 		cout << "Failed to create CGame instance." << endl;
 	}
+}
+
+void test()
+{
+	CFormula* pFormula = NULL;
+	pFormula = new CFormula();
+
+	if (pFormula)
+	{
+		string formula = "";
+		cin >> formula;
+		pFormula->load_formula(formula);
+		SAFE_DELETE(pFormula);
+	}
+	else
+	{
+		cout << "Failed to create CFormula instance." << endl;
+	}
+}
+
+int main()
+{
+	//play24();
 
 	return 0;
 }
