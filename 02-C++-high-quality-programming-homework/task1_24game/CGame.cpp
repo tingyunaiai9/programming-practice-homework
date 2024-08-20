@@ -16,13 +16,13 @@ bool CGame::play()
 {
 	bool bRet = true;
 	
-	bRet = getInputs();
+	bRet = get_inputs();
 	if (false == bRet)
 	{
 		return bRet;
 	}
 
-	bRet = findResults();
+	bRet = find_results();
 	if (false == bRet)
 	{
 		return bRet;
@@ -31,7 +31,7 @@ bool CGame::play()
 	return bRet;
 }
 
-bool CGame::isDegital(const string& str)
+bool CGame::is_degital(const string& str)
 {
 	if (str.empty())
 	{
@@ -49,7 +49,7 @@ bool CGame::isDegital(const string& str)
 	return true;
 }
 
-bool CGame::getInputs()
+bool CGame::get_inputs()
 {
 	bool bRet = true;
 	//cout << "Please input " << m_cardNum <<" cards: " << endl;
@@ -59,7 +59,7 @@ bool CGame::getInputs()
 	for (int i = 0; i < m_cardNum; i++)
 	{
 		cin >> card;
-		if (!isDegital(card))
+		if (!is_degital(card))
 		{
 			cout << "Invalid input: " << card << endl;
 			return false;
@@ -71,7 +71,7 @@ bool CGame::getInputs()
 	return bRet;
 }
 
-bool CGame::findResults()
+bool CGame::find_results()
 {
 	bool bRet = true;
 	bRet = search(m_cards);

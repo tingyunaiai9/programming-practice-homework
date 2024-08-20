@@ -22,10 +22,10 @@ public:
 	bool play();
 
 private:
-	bool isDegital(const string& str);
+	bool is_degital(const string& str);
 
-	bool getInputs();
-	bool findResults();
+	bool get_inputs();
+	bool find_results();
 	bool search(vector<string> cur_combine);
 };
 
