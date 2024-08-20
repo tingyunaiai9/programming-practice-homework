@@ -20,31 +20,31 @@ bool CFormula::load_formula(string formula)
 	bool bRet = true;
 
 	m_instrFormula = formula;
-	//cout << "formula: " << m_instrFormula << endl;
+	cout << "formula: " << m_instrFormula << endl;
 
 	bRet = to_treenode();
 	if (false == bRet)
 	{
 		return bRet;
 	}
-	//cout << "treenode: ";
-	//dump_node(m_treenode);
+	cout << "treenode: ";
+	dump_node(m_treenode);
 
 	bRet = to_inorder();
 	if (false == bRet)
 	{
 		return bRet;
 	}
-	//cout << "inorder: ";
-	//dump_node(m_inorder);
+	cout << "inorder: ";
+	dump_node(m_inorder);
 
 	bRet = to_polishorder();
 	if (false == bRet)
 	{
 		return bRet;
 	}
-	//cout << "polishorder: ";
-	//dump_node(m_polishorder);
+	cout << "polishorder: ";
+	dump_node(m_polishorder);
 
 	bRet = to_binarytree();
 	if (false == bRet)
@@ -67,15 +67,20 @@ bool CFormula::to_treenode()
 		if ((*it >= '0') && (*it <= '9'))
 		{
 			tmp_degital = *it + tmp_degital;
-			if (it == m_instrFormula.rend())
+			
+			if (it == m_instrFormula.rend() - 1)
 			{
 				tree_node = new CDegital(tmp_degital);
 				tmp_degital = "";
 			}
-			else if (*(it - 1) < '0' || *(it - 1) > '9')
+			else if (*(it + 1) < '0' || *(it + 1) > '9')
 			{
 				tree_node = new CDegital(tmp_degital);
 				tmp_degital = "";
+			}
+			else
+			{
+				continue;
 			}
 		}
 		else if (*it == '(')

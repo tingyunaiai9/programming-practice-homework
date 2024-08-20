@@ -40,6 +40,7 @@ void test()
 int main()
 {
 	//play24();
+	test();
 
 	return 0;
 }
