@@ -16,7 +16,7 @@ inline void SAFE_DELETE(T*& t)
 	{
 		delete t;
 	}
-	t = NULL;
+	t = nullptr;
 }
 
 

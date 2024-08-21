@@ -4,8 +4,8 @@
 
 CNode::CNode()
 {
-	m_left = NULL;
-	m_right = NULL;
+	m_left = nullptr;
+	m_right = nullptr;
 }
 
 CNode::~CNode()

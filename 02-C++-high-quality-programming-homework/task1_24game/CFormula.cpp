@@ -59,7 +59,7 @@ bool CFormula::to_treenode()
 {
 	bool bRet = true;
 
-	CNode* tree_node = NULL;
+	CNode* tree_node = nullptr;
 	string tmp_degital = "";
 
 	for (auto it = m_instrFormula.rbegin(); it != m_instrFormula.rend(); ++it)

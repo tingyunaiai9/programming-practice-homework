@@ -5,7 +5,7 @@
 
 void play24()
 {
-	CGame* pGame = NULL;
+	CGame* pGame = nullptr;
 	pGame = new CGame();
 
 	if (pGame)
@@ -21,7 +21,7 @@ void play24()
 
 void test()
 {
-	CFormula* pFormula = NULL;
+	CFormula* pFormula = nullptr;
 	pFormula = new CFormula();
 
 	if (pFormula)
