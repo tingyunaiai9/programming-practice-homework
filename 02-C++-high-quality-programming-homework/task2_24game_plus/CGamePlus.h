@@ -1,0 +1,32 @@
+#pragma once
+
+class CGamePlus
+{
+private:
+	const int m_cardNum = 4;
+	const int m_target = 24;
+	const int m_rangeMin = 1;
+	const int m_rangeMax = 13;
+
+	const vector<string> m_operators = { "+", "-", "*", "/" };
+
+	vector<string> m_cards;
+	set<string> m_results;
+
+	bool m_hasResult = false;
+
+public:
+	CGamePlus();
+	~CGamePlus();
+
+	bool play();
+
+private:
+	bool is_degital(const string& str);
+
+	bool get_inputs();
+	bool find_results();
+	bool search(vector<string> cur_combine);
+	bool check_result(const string& formula);
+};
+
