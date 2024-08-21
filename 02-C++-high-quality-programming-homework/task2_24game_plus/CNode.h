@@ -40,22 +40,6 @@ public:
     virtual double calc();
 };
 
-class CLeftBracket :
-    public CNode
-{
-public:
-    virtual string get_name() { return "("; };
-    virtual bool is_leftbracket() { return true; };
-};
-
-class CRightBracket :
-    public CNode
-{
-public:
-    virtual string get_name() { return ")"; };
-    virtual bool is_rightbracket() { return true; };
-};
-
 class COperator :
     public CNode
 {
@@ -68,17 +52,8 @@ class CPlus :
 {
 public:
     virtual string get_name() { return "+"; };
-    virtual int weight() { return 1; };
-
-    virtual double calc();
-};
-
-class CMinus :
-    public COperator
-{
-public:
-    virtual string get_name() { return "-"; };
-    virtual int weight() { return 1; };
+    //virtual int weight() { return 1; };
+    virtual int weight() { return 0; };
 
     virtual double calc();
 };
@@ -88,17 +63,7 @@ class CMultiply :
 {
 public:
     virtual string get_name() { return "*"; };
-    virtual int weight() { return 2; };
-
-    virtual double calc();
-};
-
-class CDivide :
-    public COperator
-{
-public:
-    virtual string get_name() { return "/"; };
-    virtual int weight() { return 2; };
+	virtual int weight() { return 0; };
 
     virtual double calc();
 };

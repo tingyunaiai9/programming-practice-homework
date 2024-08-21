@@ -24,9 +24,7 @@ public:
 
 	bool load_formula(string formula);
 	bool calc_formula();
-	bool optimize_formula();
 	double get_result() const;
-	string get_optimized_formula() const;
 
 private:
 	bool to_treenode();

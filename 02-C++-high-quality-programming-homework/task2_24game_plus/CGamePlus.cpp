@@ -53,10 +53,14 @@ bool CGamePlus::is_degital(const string& str)
 bool CGamePlus::get_inputs()
 {
 	bool bRet = true;
-	//cout << "Please input " << m_cardNum <<" cards: " << endl;
-
+	//cout << "Please input the number of cards: " << endl;
+	cin >> m_cardNum;
+	//cout << "Please input the target number: " << endl;
+	cin >> m_target;
+	
 	m_cards.clear();
 	string card;
+	//cout << "Please input " << m_cardNum <<" cards: " << endl;
 	for (int i = 0; i < m_cardNum; i++)
 	{
 		cin >> card;
@@ -84,7 +88,15 @@ bool CGamePlus::find_results()
 
 	if (false == m_hasResult)
 	{
-		cout << "no" << endl;
+		cout << "No" << endl;
+		if (false == m_hasLarger)
+		{
+			cout << -1 << endl;
+		}
+		else
+		{
+			cout << m_minLarger << endl;
+		}
 	}
 	else
 	{
@@ -100,6 +112,11 @@ bool CGamePlus::search(vector<string> cur_combine)
 {
 	bool bRet = true;
 
+	if (m_hasResult)
+	{
+		return bRet;
+	}
+
 	if (cur_combine.size() == 1)
 	{
 		bRet = check_result(cur_combine[0]);
@@ -108,33 +125,19 @@ bool CGamePlus::search(vector<string> cur_combine)
 
 	int size = cur_combine.size();
 
-	// pick two elements from cur_combine to combine
-	for (int i = 0; i < size; i++)
+	// pick the first two elements from cur_combine to combine
+	vector<string> next_combine;
+	for (int k = 2; k < size; k++)
 	{
-		for (int j = 0; j < size; j++)
-		{
-			if (i == j) // same card
-			{
-				continue;
-			}
+		next_combine.push_back(cur_combine[k]);
+	}
 
-			vector<string> next_combine;
-			for (int k = 0; k < size; k++)
-			{
-				if (k != i && k != j)
-				{
-					next_combine.push_back(cur_combine[k]);
-				}
-			}
-
-			// add the new element to the next_combine
-			for (auto op : m_operators)
-			{
-				next_combine.push_back("(" + cur_combine[i] + op + cur_combine[j] + ")");
-				search(next_combine);
-				next_combine.pop_back();
-			}
-		}
+	for (auto op : m_operators)
+	{
+		next_combine.insert(next_combine.begin(), 
+							cur_combine[0] + op + cur_combine[1]);
+		search(next_combine);
+		next_combine.erase(next_combine.begin());
 	}
 
 	return bRet;
@@ -172,17 +175,13 @@ bool CGamePlus::check_result(const string& formula)
 	double result = pFormula->get_result();
 	if (abs(result - m_target) < 0.0001)
 	{
-		bRet = pFormula->optimize_formula();
-		if (false == bRet)
-		{
-			cout << "Failed to optimize formula." << endl;
-			SAFE_DELETE(pFormula);
-			return false;
-		}
-
-		string optimized_formula = pFormula->get_optimized_formula();
-		m_results.insert(optimized_formula);
+		m_results.insert(formula);
 		m_hasResult = true;
+	}
+	else if (result > m_target)
+	{
+		m_hasLarger = true;
+		m_minLarger = min(m_minLarger, (int)result);
 	}
 
 	SAFE_DELETE(pFormula);

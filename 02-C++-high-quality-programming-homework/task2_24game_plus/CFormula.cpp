@@ -83,29 +83,13 @@ bool CFormula::to_treenode()
 				continue;
 			}
 		}
-		else if (*it == '(')
-		{
-			tree_node = new CLeftBracket();
-		}
-		else if (*it == ')')
-		{
-			tree_node = new CRightBracket();
-		}
 		else if (*it == '+')
 		{
 			tree_node = new CPlus();
 		}
-		else if (*it == '-')
-		{
-			tree_node = new CMinus();
-		}
 		else if (*it == '*')
 		{
 			tree_node = new CMultiply();
-		}
-		else if (*it == '/')
-		{
-			tree_node = new CDivide();
 		}
 		else
 		{
@@ -288,30 +272,9 @@ bool CFormula::calc_formula()
 	return bRet;
 }
 
-bool CFormula::optimize_formula()
-{
-	bool bRet = true;
-
-	if (m_instrFormula.empty())
-	{
-		cout << "formula is empty." << endl;
-		m_optimizedFormula = "";
-		return false;
-	}
-
-	m_optimizedFormula = m_instrFormula.substr(1, m_instrFormula.length() - 2);
-
-	return bRet;
-}
-
 double CFormula::get_result() const
 {
 	return m_result;
-}
-
-string CFormula::get_optimized_formula() const
-{
-	return m_optimizedFormula;
 }
 
 void CFormula::dump_nodeVec(NodeVec& nodeVec)

@@ -44,24 +44,6 @@ double CPlus::calc()
 	return left + right;
 }
 
-double CMinus::calc() // left - right
-{
-	double left = DBL_MAX;
-	double right = DBL_MAX;
-
-	if (m_left)
-		left = m_left->calc();
-	else
-		return DBL_MAX;
-
-	if (m_right)
-		right = m_right->calc();
-	else
-		return DBL_MAX;
-
-	return left - right;
-}
-
 double CMultiply::calc()
 {
 	double left = DBL_MAX;
@@ -78,25 +60,4 @@ double CMultiply::calc()
 		return DBL_MAX;
 
 	return left * right;
-}
-
-double CDivide::calc()
-{
-	double left = DBL_MAX;
-	double right = DBL_MAX;
-
-	if (m_left)
-		left = m_left->calc();
-	else
-		return DBL_MAX;
-
-	if (m_right)
-		right = m_right->calc();
-	else
-		return DBL_MAX;
-
-	if (right == 0)
-		return DBL_MAX;
-
-	return left / right;
 }

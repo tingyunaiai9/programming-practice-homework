@@ -3,17 +3,19 @@
 class CGamePlus
 {
 private:
-	const int m_cardNum = 4;
-	const int m_target = 24;
-	const int m_rangeMin = 1;
-	const int m_rangeMax = 13;
+	int m_cardNum;
+	int m_target;
+	int m_minLarger = INT_MAX;
+	const int m_rangeMin = 0;
+	const int m_rangeMax = INT_MAX;
 
-	const vector<string> m_operators = { "+", "-", "*", "/" };
+	const vector<string> m_operators = { "+", "*" };
 
 	vector<string> m_cards;
 	set<string> m_results;
 
 	bool m_hasResult = false;
+	bool m_hasLarger = false;
 
 public:
 	CGamePlus();
