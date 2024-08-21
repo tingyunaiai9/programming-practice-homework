@@ -102,49 +102,7 @@ bool CGame::search(vector<string> cur_combine)
 
 	if (cur_combine.size() == 1)
 	{
-		CFormula* pFormula = nullptr;
-		pFormula = new CFormula();
-
-		if (!pFormula)
-		{
-			cout << "Failed to create CFormula instance." << endl;
-			return false;
-		}
-
-		string formula = cur_combine[0];
-		bRet = pFormula->load_formula(formula);
-		if (false == bRet)
-		{
-			cout << "Failed to load formula." << endl;
-			SAFE_DELETE(pFormula);
-			return false;
-		}
-
-		bRet = pFormula->calc_formula();
-		if (false == bRet)
-		{
-			cout << "Failed to calculate formula." << endl;
-			SAFE_DELETE(pFormula);
-			return false;
-		}
-
-		double result = pFormula->get_result();
-		if (abs(result - m_target) < 0.0001)
-		{
-			// check if the result is already in the results
-			if (find(m_results.begin(), m_results.end(), formula) != m_results.end())
-			{
-				SAFE_DELETE(pFormula);
-				return bRet;
-			}
-			else
-			{
-				m_results.push_back(formula);
-				m_hasResult = true;
-			}
-		}
-
-		SAFE_DELETE(pFormula);
+		bRet = check_result(cur_combine[0]);
 		return bRet;
 	}
 
@@ -179,6 +137,55 @@ bool CGame::search(vector<string> cur_combine)
 		}
 	}
 
+	return bRet;
+}
+
+bool CGame::check_result(const string& formula)
+{
+	bool bRet = true;
+
+	CFormula* pFormula = nullptr;
+	pFormula = new CFormula();
+
+	if (!pFormula)
+	{
+		cout << "Failed to create CFormula instance." << endl;
+		return false;
+	}
+
+	bRet = pFormula->load_formula(formula);
+	if (false == bRet)
+	{
+		cout << "Failed to load formula." << endl;
+		SAFE_DELETE(pFormula);
+		return false;
+	}
+
+	bRet = pFormula->calc_formula();
+	if (false == bRet)
+	{
+		cout << "Failed to calculate formula." << endl;
+		SAFE_DELETE(pFormula);
+		return false;
+	}
+
+	double result = pFormula->get_result();
+	if (abs(result - m_target) < 0.0001)
+	{
+		// check if the result is already in the results
+		if (find(m_results.begin(), m_results.end(), formula) != m_results.end())
+		{
+			SAFE_DELETE(pFormula);
+			return bRet;
+		}
+		else
+		{
+			m_results.push_back(formula);
+			m_hasResult = true;
+		}
+	}
+
+	SAFE_DELETE(pFormula);
 	return bRet;
 }
 

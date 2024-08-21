@@ -27,5 +27,6 @@ private:
 	bool get_inputs();
 	bool find_results();
 	bool search(vector<string> cur_combine);
+	bool check_result(const string& formula);
 };
 
