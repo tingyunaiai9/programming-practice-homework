@@ -4,13 +4,15 @@
 class CGame {
 	- vector<string> m_operators = { "+", "-", "*", "/" }
 	- vector<string> m_cards
-	- vector<string> m_results
+	- set<string> m_results
     - bool m_hasResult
+
     + play()
     - bool is_degital(const string& str)
 	- bool get_inputs()
 	- bool find_results()
 	- bool search(vector<string> cur_combine)
+	- bool check_result(const string& formula)
 }
 
 class CFormula {
@@ -20,6 +22,7 @@ class CFormula {
 	- NodeVec m_polishorder
 	- CNode* m_binarytree
 	- double m_result
+
     + bool load_formula(string formula)
 	+ bool calc_formula()
 	+ double get_result()
@@ -35,6 +38,7 @@ class CFormula {
 class CNode {
     # CNode* m_left
     # CNode* m_right
+
     + set_leftnode(CNode* node)
     + set_rightnode(CNode* node)
     + {abstract} string get_name()
@@ -48,6 +52,7 @@ class CNode {
 
 class CDegital {
     - string m_name
+
     + {abstract} string get_name()
     + {abstract} bool is_degital()
     + {abstract} double calc()
