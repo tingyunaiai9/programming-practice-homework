@@ -4,10 +4,10 @@ class CGamePlus
 {
 private:
 	int m_cardNum;
-	int m_target;
-	int m_minLarger = INT_MAX;
-	const int m_rangeMin = 0;
-	const int m_rangeMax = INT_MAX;
+	long long m_target;
+	long long m_minLarger = LLONG_MAX;
+	const long long m_rangeMin = 0;
+	const long long m_rangeMax = LLONG_MAX;
 
 	const vector<string> m_operators = { "+", "*" };
 

@@ -21,7 +21,7 @@ public:
 
     void set_leftnode(CNode* node) { m_left = node; };
     void set_rightnode(CNode* node) { m_right = node; };
-    virtual double calc() { return DBL_MAX; };
+    virtual long long calc() { return LLONG_MAX; };
 };
 
 class CDegital :
@@ -37,7 +37,7 @@ public:
     virtual string get_name() { return m_name; };
     virtual bool is_degital() { return true; };
 
-    virtual double calc();
+    virtual long long calc();
 };
 
 class COperator :
@@ -52,10 +52,9 @@ class CPlus :
 {
 public:
     virtual string get_name() { return "+"; };
-    //virtual int weight() { return 1; };
     virtual int weight() { return 0; };
 
-    virtual double calc();
+    virtual long long calc();
 };
 
 class CMultiply :
@@ -65,5 +64,5 @@ public:
     virtual string get_name() { return "*"; };
 	virtual int weight() { return 0; };
 
-    virtual double calc();
+    virtual long long calc();
 };

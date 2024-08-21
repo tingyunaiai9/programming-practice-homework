@@ -172,8 +172,8 @@ bool CGamePlus::check_result(const string& formula)
 		return false;
 	}
 
-	double result = pFormula->get_result();
-	if (abs(result - m_target) < 0.0001)
+	long long result = pFormula->get_result();
+	if (result == m_target)
 	{
 		m_results.insert(formula);
 		m_hasResult = true;
@@ -181,7 +181,7 @@ bool CGamePlus::check_result(const string& formula)
 	else if (result > m_target)
 	{
 		m_hasLarger = true;
-		m_minLarger = min(m_minLarger, (int)result);
+		m_minLarger = min(m_minLarger, result);
 	}
 
 	SAFE_DELETE(pFormula);

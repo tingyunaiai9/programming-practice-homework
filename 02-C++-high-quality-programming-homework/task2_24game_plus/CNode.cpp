@@ -21,43 +21,43 @@ CDegital::~CDegital()
 {
 }
 
-double CDegital::calc()
+long long CDegital::calc()
 {
-	return stod(m_name);
+	return stoll(m_name);
 }
 
-double CPlus::calc()
+long long CPlus::calc()
 {
-	double left = DBL_MAX;
-	double right = DBL_MAX;
+	long long left = LLONG_MAX;
+	long long right = LLONG_MAX;
 
 	if (m_left)
 		left = m_left->calc();
 	else
-		return DBL_MAX;
+		return LLONG_MAX;
 
 	if (m_right)
 		right = m_right->calc();
 	else
-		return DBL_MAX;
+		return LLONG_MAX;
 
 	return left + right;
 }
 
-double CMultiply::calc()
+long long CMultiply::calc()
 {
-	double left = DBL_MAX;
-	double right = DBL_MAX;
+	long long left = LLONG_MAX;
+	long long right = LLONG_MAX;
 
 	if (m_left)
 		left = m_left->calc();
 	else
-		return DBL_MAX;
+		return LLONG_MAX;
 
 	if (m_right)
 		right = m_right->calc();
 	else
-		return DBL_MAX;
+		return LLONG_MAX;
 
 	return left * right;
 }

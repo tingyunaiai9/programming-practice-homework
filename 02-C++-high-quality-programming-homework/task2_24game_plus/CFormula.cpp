@@ -20,31 +20,24 @@ bool CFormula::load_formula(string formula)
 	bool bRet = true;
 
 	m_instrFormula = formula;
-	//cout << "formula: " << m_instrFormula << endl;
 
 	bRet = to_treenode();
 	if (false == bRet)
 	{
 		return bRet;
 	}
-	//cout << "treenode: ";
-	//dump_nodeVec(m_treenode);
 
 	bRet = to_inorder();
 	if (false == bRet)
 	{
 		return bRet;
 	}
-	//cout << "inorder: ";
-	//dump_nodeVec(m_inorder);
 
 	bRet = to_polishorder();
 	if (false == bRet)
 	{
 		return bRet;
 	}
-	//cout << "polishorder: ";
-	//dump_nodeVec(m_polishorder);
 
 	bRet = to_binarytree();
 	if (false == bRet)
@@ -272,7 +265,7 @@ bool CFormula::calc_formula()
 	return bRet;
 }
 
-double CFormula::get_result() const
+long long CFormula::get_result() const
 {
 	return m_result;
 }
