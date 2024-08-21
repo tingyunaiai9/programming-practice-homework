@@ -1,10 +1,7 @@
+#include "pch.h"
 
 #include "CMember.h"
 #include "CMemberList.h"
-
-#include <iostream>
-using namespace std;
-
 
 int main()
 {

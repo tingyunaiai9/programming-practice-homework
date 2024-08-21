@@ -2,9 +2,6 @@
 
 #include "CMember.h"
 
-#include <list>
-#include <string>
-
 class MemberList
 {
 private:

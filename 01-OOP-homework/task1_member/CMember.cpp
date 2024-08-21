@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "CMember.h"
 
 Member::Member(std::string name, int age) :

@@ -33,3 +33,7 @@
 
 **/.vs/
 **/x64/
+
+# report
+*.docx
+*.pdf

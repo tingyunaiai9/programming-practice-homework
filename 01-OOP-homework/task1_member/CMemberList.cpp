@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "CMemberList.h"
 
 MemberList::MemberList(Member* members, int size)
