@@ -11,7 +11,7 @@ private:
 	const vector<string> m_operators = { "+", "-", "*", "/" };
 
 	vector<string> m_cards;
-	vector<string> m_results;
+	set<string> m_results;
 
 	bool m_hasResult = false;
 

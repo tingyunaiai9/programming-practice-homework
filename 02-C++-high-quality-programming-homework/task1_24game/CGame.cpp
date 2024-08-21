@@ -172,17 +172,8 @@ bool CGame::check_result(const string& formula)
 	double result = pFormula->get_result();
 	if (abs(result - m_target) < 0.0001)
 	{
-		// check if the result is already in the results
-		if (find(m_results.begin(), m_results.end(), formula) != m_results.end())
-		{
-			SAFE_DELETE(pFormula);
-			return bRet;
-		}
-		else
-		{
-			m_results.push_back(formula);
-			m_hasResult = true;
-		}
+		m_results.insert(formula);
+		m_hasResult = true;
 	}
 
 	SAFE_DELETE(pFormula);
