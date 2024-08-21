@@ -28,7 +28,7 @@ bool CFormula::load_formula(string formula)
 		return bRet;
 	}
 	cout << "treenode: ";
-	dump_node(m_treenode);
+	dump_nodeVec(m_treenode);
 
 	bRet = to_inorder();
 	if (false == bRet)
@@ -36,7 +36,7 @@ bool CFormula::load_formula(string formula)
 		return bRet;
 	}
 	cout << "inorder: ";
-	dump_node(m_inorder);
+	dump_nodeVec(m_inorder);
 
 	bRet = to_polishorder();
 	if (false == bRet)
@@ -44,7 +44,7 @@ bool CFormula::load_formula(string formula)
 		return bRet;
 	}
 	cout << "polishorder: ";
-	dump_node(m_polishorder);
+	dump_nodeVec(m_polishorder);
 
 	bRet = to_binarytree();
 	if (false == bRet)
@@ -229,14 +229,84 @@ bool CFormula::to_binarytree()
 {
 	bool bRet = true;
 
+	NodeIt polish_start, polish_end;
+	NodeIt inorder_start, inorder_end;
+
+	polish_start = m_polishorder.begin();
+	polish_end = m_polishorder.end() - 1;
+
+	inorder_start = m_inorder.begin();
+	inorder_end = m_inorder.end() - 1;
+
+	m_binarytree = build_tree(polish_start, polish_end, 
+							  inorder_start, inorder_end);
+	if (NULL == m_binarytree)
+	{
+		cout << "build tree fail." << endl;
+		return false;
+	}
+
 	return bRet;
 }
 
-void CFormula::dump_node(NodeVec& nodeVec)
+CNode* CFormula::build_tree(NodeIt ps, NodeIt pe, NodeIt is, NodeIt ie)
+{
+	CNode* tree_node = *ps;
+
+	NodeIt ri = find(is, ie, tree_node);
+	size_t left_len = ri - is;
+	size_t right_len = ie - ri;
+
+	if (left_len > 0)
+	{
+		CNode* left_node = build_tree(ps + 1, ps + left_len, is, ri - 1);
+		tree_node->set_leftnode(left_node);
+	}
+
+	if (right_len > 0)
+	{
+		CNode* right_node = build_tree(ps + left_len + 1, pe, ri + 1, ie);
+		tree_node->set_rightnode(right_node);
+	}
+
+	return tree_node;
+}
+
+bool CFormula::calc_formula()
+{
+	bool bRet = true;
+
+	if (!m_binarytree)
+	{
+		cout << "binary tree is null." << endl;
+		m_result = DBL_MAX;
+		return false;
+	}
+	
+	m_result = m_binarytree->calc();
+
+	return bRet;
+}
+
+double CFormula::get_result() const
+{
+	return m_result;
+}
+
+void CFormula::dump_nodeVec(NodeVec& nodeVec)
 {
 	for (auto& k : nodeVec)
 	{
 		cout << k->get_name();
+	}
+	cout << endl;
+}
+
+void CFormula::dump_nodeIt(NodeIt start, NodeIt end)
+{
+	for (auto it = start; it != end; it++)
+	{
+		cout << (*it)->get_name();
 	}
 	cout << endl;
 }

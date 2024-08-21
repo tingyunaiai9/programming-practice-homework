@@ -10,8 +10,6 @@ CNode::CNode()
 
 CNode::~CNode()
 {
-	SAFE_DELETE(m_left);
-	SAFE_DELETE(m_right);
 }
 
 CDegital::CDegital(string name) :

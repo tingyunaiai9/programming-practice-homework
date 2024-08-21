@@ -21,6 +21,8 @@ void play24()
 
 void test()
 {
+	bool bRet = true;
+
 	CFormula* pFormula = nullptr;
 	pFormula = new CFormula();
 
@@ -28,7 +30,21 @@ void test()
 	{
 		string formula = "";
 		cin >> formula;
-		pFormula->load_formula(formula);
+		bRet = pFormula->load_formula(formula);
+		if (false == bRet)
+		{
+			cout << "Failed to load formula." << endl;
+			SAFE_DELETE(pFormula);
+		}
+
+		bRet = pFormula->calc_formula();
+		if (false == bRet)
+		{
+			cout << "Failed to calculate formula." << endl;
+			SAFE_DELETE(pFormula);
+		}
+
+		cout << "result: " << pFormula->get_result() << endl;
 		SAFE_DELETE(pFormula);
 	}
 	else
@@ -39,6 +55,7 @@ void test()
 
 int main()
 {
+	_CrtDumpMemoryLeaks();
 	//play24();
 	test();
 
