@@ -16,6 +16,7 @@ private:
 	CNode* m_binarytree;
 
 	double m_result;
+	string m_optimizedFormula;
 
 public:
 	CFormula();
@@ -23,7 +24,9 @@ public:
 
 	bool load_formula(string formula);
 	bool calc_formula();
+	bool optimize_formula();
 	double get_result() const;
+	string get_optimized_formula() const;
 
 private:
 	bool to_treenode();

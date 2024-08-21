@@ -172,7 +172,16 @@ bool CGame::check_result(const string& formula)
 	double result = pFormula->get_result();
 	if (abs(result - m_target) < 0.0001)
 	{
-		m_results.insert(formula);
+		bRet = pFormula->optimize_formula();
+		if (false == bRet)
+		{
+			cout << "Failed to optimize formula." << endl;
+			SAFE_DELETE(pFormula);
+			return false;
+		}
+
+		string optimized_formula = pFormula->get_optimized_formula();
+		m_results.insert(optimized_formula);
 		m_hasResult = true;
 	}
 
