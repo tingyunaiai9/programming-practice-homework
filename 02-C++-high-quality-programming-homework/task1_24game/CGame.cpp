@@ -86,7 +86,13 @@ bool CGame::find_results()
 	{
 		cout << "no" << endl;
 	}
-
+	else
+	{
+		for (auto& result : m_results)
+		{
+			cout << result << endl;
+		}
+	}
 	return bRet;
 }
 
@@ -125,11 +131,20 @@ bool CGame::search(vector<string> cur_combine)
 		double result = pFormula->get_result();
 		if (abs(result - m_target) < 0.0001)
 		{
-			cout << "Result: " << formula << " = " << result << endl;
-			m_results.push_back(formula);
-			m_hasResult = true;
+			// check if the result is already in the results
+			if (find(m_results.begin(), m_results.end(), formula) != m_results.end())
+			{
+				SAFE_DELETE(pFormula);
+				return bRet;
+			}
+			else
+			{
+				m_results.push_back(formula);
+				m_hasResult = true;
+			}
 		}
 
+		SAFE_DELETE(pFormula);
 		return bRet;
 	}
 
@@ -166,3 +181,4 @@ bool CGame::search(vector<string> cur_combine)
 
 	return bRet;
 }
+
