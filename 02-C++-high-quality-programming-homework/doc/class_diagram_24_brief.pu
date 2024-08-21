@@ -1,0 +1,91 @@
+
+@startuml
+
+class CGame {
+    - bool m_hasResult
+
+	- bool search(vector<string> cur_combine)
+}
+
+class CFormula {
+	- string m_instrFormula
+	- CNode* m_binarytree
+
+    + bool load_formula(string formula)
+	- CNode* build_tree(NodeIt ps, NodeIt pe, NodeIt is, NodeIt ie)
+}
+
+class CNode {
+    # CNode* m_left
+    # CNode* m_right
+
+    + set_leftnode(CNode* node)
+    + set_rightnode(CNode* node)
+    + {abstract} string get_name()
+    + {abstract} bool is_degital()
+    + {abstract} bool is_leftbracket()
+    + {abstract} bool is_rightbracket()
+	+ {abstract} bool is_operator()
+    + {abstract} int weight()
+    + {abstract} double calc()
+}
+
+class CDegital {
+    - string m_name
+
+    + {abstract} string get_name()
+    + {abstract} bool is_degital()
+    + {abstract} double calc()
+}
+
+class COperator {
+    + {abstract} bool is_operator()
+}
+
+class CLeftBracket {
+    + {abstract} string get_name()
+    + {abstract} bool is_leftbracket()
+}
+
+class CRightBracket {
+    + {abstract} string get_name()
+    + {abstract} bool is_rightbracket()
+}
+
+class CPlus {
+	+ {abstract} string get_name()
+	+ {abstract} int weight()
+	+ {abstract} double calc()
+}
+
+class CMinus {
+	+ {abstract} string get_name()
+	+ {abstract} int weight()
+	+ {abstract} double calc()
+}
+
+class CMultiply {
+	+ {abstract} string get_name()
+	+ {abstract} int weight()
+	+ {abstract} double calc()
+}
+
+class CDivide {
+	+ {abstract} string get_name()
+	+ {abstract} int weight()
+	+ {abstract} double calc()
+}
+
+CGame ..> CFormula
+CFormula o-- CNode
+CNode <|-- CDegital
+CNode <|-- COperator
+CNode <|-- CLeftBracket
+CNode <|-- CRightBracket
+
+COperator <|-- CPlus
+COperator <|-- CMinus
+COperator <|-- CMultiply
+COperator <|-- CDivide
+
+@enduml
