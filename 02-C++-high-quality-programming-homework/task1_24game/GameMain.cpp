@@ -56,8 +56,7 @@ void test()
 int main()
 {
 	_CrtDumpMemoryLeaks();
-	//play24();
-	test();
+	play24();
 
 	return 0;
 }

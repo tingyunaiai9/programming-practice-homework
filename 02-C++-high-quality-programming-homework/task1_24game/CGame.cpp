@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "CGame.h"
+#include "CFormula.h"
 
 CGame::CGame()
 {
@@ -75,6 +76,16 @@ bool CGame::find_results()
 {
 	bool bRet = true;
 	bRet = search(m_cards);
+	if (false == bRet)
+	{
+		cout << "Failed to search results." << endl;
+		return bRet;
+	}
+
+	if (false == m_hasResult)
+	{
+		cout << "no" << endl;
+	}
 
 	return bRet;
 }
@@ -85,8 +96,40 @@ bool CGame::search(vector<string> cur_combine)
 
 	if (cur_combine.size() == 1)
 	{
-		// todo: calculate the result
-		cout << cur_combine[0] << endl;
+		CFormula* pFormula = nullptr;
+		pFormula = new CFormula();
+
+		if (!pFormula)
+		{
+			cout << "Failed to create CFormula instance." << endl;
+			return false;
+		}
+
+		string formula = cur_combine[0];
+		bRet = pFormula->load_formula(formula);
+		if (false == bRet)
+		{
+			cout << "Failed to load formula." << endl;
+			SAFE_DELETE(pFormula);
+			return false;
+		}
+
+		bRet = pFormula->calc_formula();
+		if (false == bRet)
+		{
+			cout << "Failed to calculate formula." << endl;
+			SAFE_DELETE(pFormula);
+			return false;
+		}
+
+		double result = pFormula->get_result();
+		if (abs(result - m_target) < 0.0001)
+		{
+			cout << "Result: " << formula << " = " << result << endl;
+			m_results.push_back(formula);
+			m_hasResult = true;
+		}
+
 		return bRet;
 	}
 
