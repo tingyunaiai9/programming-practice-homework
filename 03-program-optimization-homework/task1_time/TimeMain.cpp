@@ -1,117 +1,144 @@
 #include <iostream>
 #include <chrono>
-#include <vector>
+#include <fstream>
 
 using namespace std;
 
 const int N = 64;
-const int TEST_TIMES = 100;
+const int TEST_TIMES = 1000;
 
-void reset_arrays(vector<vector<vector<int>>>& a,
-    vector<vector<vector<int>>>& b,
-    vector<vector<vector<int>>>& c,
-    int a_value = 1,
-    int b_value = 2,
-    int c_value = 0)
-{
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++)
-            for (int k = 0; k < N; k++)
-                a[i][j][k] = a_value;
-
-	for (int i = 0; i < N; i++)
-		for (int j = 0; j < N; j++)
-			for (int k = 0; k < N; k++)
-				b[i][j][k] = b_value;
-
-	for (int i = 0; i < N; i++)
-		for (int j = 0; j < N; j++)
-			for (int k = 0; k < N; k++)
-				c[i][j][k] = c_value;
-}
+int a[N][N][N];
+int b[N][N][N];
+int c[N][N][N];
 
 int main()
 {
+	// record
+	ofstream fout("time_record.txt", ios::app);
+	fout << "N=" << N << endl;
+	fout << "TEST_TIMES=" << TEST_TIMES << endl;
+	fout.close();
 
-    vector<vector<vector<int>>> a(N, vector<vector<int>>(N, vector<int>(N, 1)));
-    vector<vector<vector<int>>> b(N, vector<std::vector<int>>(N, vector<int>(N, 2)));
-    vector<vector<vector<int>>> c(N, vector<std::vector<int>>(N, vector<int>(N, 0)));
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < N; j++)
+			for (int k = 0; k < N; k++)
+				a[i][j][k] = 1;
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < N; j++)
+			for (int k = 0; k < N; k++)
+				b[i][j][k] = 2;
+
+	auto start = chrono::high_resolution_clock::now();
+	auto end = chrono::high_resolution_clock::now();
+	chrono::duration<double> elapsed = end - start;
 
 	// i-j-k
-    auto start = chrono::high_resolution_clock::now();
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++)
-            for (int k = 0; k < N; k++)
-                c[i][j][k] = a[i][j][k] + b[i][j][k];
-    auto end = chrono::high_resolution_clock::now();
-    chrono::duration<double> elapsed = end - start;
-    cout << "N: " << N << "  ";
-    cout << "i-j-k: " << elapsed.count() << " seconds" << endl;
-    
-	reset_arrays(a, b, c);
-
-	// i-k-j
-    start = chrono::high_resolution_clock::now();
-    for (int i = 0; i < N; i++)
-        for (int k = 0; k < N; k++)
-            for (int j = 0; j < N; j++)
-                c[i][j][k] = a[i][j][k] + b[i][j][k];
-    end = chrono::high_resolution_clock::now();
-    elapsed = end - start;
-    cout << "N: " << N << "  ";
-    cout << "i-k-j: " << elapsed.count() << " seconds" << endl;
-
-	reset_arrays(a, b, c);
-
-	// j-i-k
-	start = chrono::high_resolution_clock::now();
-	for (int j = 0; j < N; j++)
-		for (int i = 0; i < N; i++)
-			for (int k = 0; k < N; k++)
-				c[i][j][k] = a[i][j][k] + b[i][j][k];
-	end = chrono::high_resolution_clock::now();
-	elapsed = end - start;
-	cout << "N: " << N << "  ";
-	cout << "j-i-k: " << elapsed.count() << " seconds" << endl;
-
-	reset_arrays(a, b, c);
-
-	// j-k-i
-	start = chrono::high_resolution_clock::now();
-	for (int j = 0; j < N; j++)
-		for (int k = 0; k < N; k++)
-			for (int i = 0; i < N; i++)
-				c[i][j][k] = a[i][j][k] + b[i][j][k];
-	end = chrono::high_resolution_clock::now();
-	elapsed = end - start;
-	cout << "N: " << N << "  ";
-	cout << "j-k-i: " << elapsed.count() << " seconds" << endl;
-
-	reset_arrays(a, b, c);
-
-	// k-i-j
-	start = chrono::high_resolution_clock::now();
-	for (int k = 0; k < N; k++)
+	double total_time = 0.0;
+	for (int t = 0; t < TEST_TIMES; t++)
+	{
+		start = chrono::high_resolution_clock::now();
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
-				c[i][j][k] = a[i][j][k] + b[i][j][k];
-	end = chrono::high_resolution_clock::now();
-	elapsed = end - start;
-	cout << "N: " << N << "  ";
-	cout << "k-i-j: " << elapsed.count() << " seconds" << endl;
+				for (int k = 0; k < N; k++)
+					c[i][j][k] = a[i][j][k] + b[i][j][k];
+		end = chrono::high_resolution_clock::now();
+		elapsed = end - start;
+		total_time += elapsed.count();
+	}
+	fout.open("time_record.txt", ios::app);
+	fout << "i-j-k=" << total_time / TEST_TIMES << endl;
+	fout.close();
+	cout << "i-j-k=" << total_time / TEST_TIMES << endl;
 
-	reset_arrays(a, b, c);
+    // i-k-j
+    total_time = 0.0;
+    for (int t = 0; t < TEST_TIMES; t++)
+    {
+        start = chrono::high_resolution_clock::now();
+        for (int i = 0; i < N; i++)
+            for (int k = 0; k < N; k++)
+                for (int j = 0; j < N; j++)
+                    c[i][j][k] = a[i][j][k] + b[i][j][k];
+        end = chrono::high_resolution_clock::now();
+        elapsed = end - start;
+        total_time += elapsed.count();
+    }
+    fout.open("time_record.txt", ios::app);
+    fout << "i-k-j=" << total_time / TEST_TIMES << endl;
+    fout.close();
+    cout << "i-k-j=" << total_time / TEST_TIMES << endl;
+
+    // j-i-k
+    total_time = 0.0;
+    for (int t = 0; t < TEST_TIMES; t++)
+    {
+        start = chrono::high_resolution_clock::now();
+        for (int j = 0; j < N; j++)
+            for (int i = 0; i < N; i++)
+                for (int k = 0; k < N; k++)
+                    c[i][j][k] = a[i][j][k] + b[i][j][k];
+        end = chrono::high_resolution_clock::now();
+        elapsed = end - start;
+        total_time += elapsed.count();
+    }
+    fout.open("time_record.txt", ios::app);
+    fout << "j-i-k=" << total_time / TEST_TIMES << endl;
+    fout.close();
+    cout << "j-i-k=" << total_time / TEST_TIMES << endl;
+
+    // j-k-i
+    total_time = 0.0;
+    for (int t = 0; t < TEST_TIMES; t++)
+    {
+        start = chrono::high_resolution_clock::now();
+        for (int j = 0; j < N; j++)
+            for (int k = 0; k < N; k++)
+                for (int i = 0; i < N; i++)
+                    c[i][j][k] = a[i][j][k] + b[i][j][k];
+        end = chrono::high_resolution_clock::now();
+        elapsed = end - start;
+        total_time += elapsed.count();
+    }
+    fout.open("time_record.txt", ios::app);
+    fout << "j-k-i=" << total_time / TEST_TIMES << endl;
+    fout.close();
+	cout << "j-k-i=" << total_time / TEST_TIMES << endl;
+
+	// k-i-j
+	total_time = 0.0;
+	for (int t = 0; t < TEST_TIMES; t++)
+	{
+		start = chrono::high_resolution_clock::now();
+		for (int k = 0; k < N; k++)
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
+					c[i][j][k] = a[i][j][k] + b[i][j][k];
+		end = chrono::high_resolution_clock::now();
+		elapsed = end - start;
+		total_time += elapsed.count();
+	}
+	fout.open("time_record.txt", ios::app);
+	fout << "k-i-j=" << total_time / TEST_TIMES << endl;
+	fout.close();
+	cout << "k-i-j=" << total_time / TEST_TIMES << endl;
 
 	// k-j-i
-	start = chrono::high_resolution_clock::now();
-	for (int k = 0; k < N; k++)
-		for (int j = 0; j < N; j++)
-			for (int i = 0; i < N; i++)
-				c[i][j][k] = a[i][j][k] + b[i][j][k];
-	end = chrono::high_resolution_clock::now();
-	elapsed = end - start;
-	cout << "N: " << N << "  ";
-	cout << "k-j-i: " << elapsed.count() << " seconds" << endl;
+	total_time = 0.0;
+	for (int t = 0; t < TEST_TIMES; t++)
+	{
+		start = chrono::high_resolution_clock::now();
+		for (int k = 0; k < N; k++)
+			for (int j = 0; j < N; j++)
+				for (int i = 0; i < N; i++)
+					c[i][j][k] = a[i][j][k] + b[i][j][k];
+		end = chrono::high_resolution_clock::now();
+		elapsed = end - start;
+		total_time += elapsed.count();
+	}
+	fout.open("time_record.txt", ios::app);
+	fout << "k-j-i=" << total_time / TEST_TIMES << endl;
+	fout.close();
+	cout << "k-j-i=" << total_time / TEST_TIMES << endl;
 
     return 0;
 }
