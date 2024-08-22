@@ -6,7 +6,7 @@ private:
 	int m_cardNum;
 	long long m_target;
 	long long m_minLarger = LLONG_MAX;
-	const long long m_rangeMin = 0;
+	const long long m_rangeMin = 1;
 	const long long m_rangeMax = LLONG_MAX;
 
 	const vector<string> m_operators = { "+", "*" };
