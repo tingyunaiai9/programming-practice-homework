@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int N = 64;
+const int N = 256;
 const int TEST_TIMES = 1000;
 
 int a[N][N][N];
