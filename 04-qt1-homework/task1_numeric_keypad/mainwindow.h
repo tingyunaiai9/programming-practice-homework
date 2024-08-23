@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSignalMapper>
+#include <QLCDNumber>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,11 +21,12 @@ public:
 
 public slots:
     void numberClicked(int number);
-
-private:
-    QSignalMapper *m_signalMapper;
+    void clearClicked();
 
 private:
     Ui::MainWindow *ui;
+
+    QSignalMapper *m_signalMapper;
+    QLCDNumber *m_lcdNumber;
 };
 #endif // MAINWINDOW_H
