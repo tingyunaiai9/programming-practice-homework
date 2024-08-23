@@ -14,9 +14,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_signalMapper = new QSignalMapper(this);
 
-    for(int i=0; i<10; i++)
+    // button 0
+    QPushButton *button = new QPushButton(QString::number(0), this);
+    button->resize(80,80);
+    button->move(200, 450);
+    connect(button,SIGNAL(clicked()),m_signalMapper,SLOT(map()));
+    m_signalMapper->setMapping(button, 0);
+
+    for(int i=1; i<10; i++)
     {
-        QPushButton *button = new QPushButton(QString::number(i), this);
+        button = new QPushButton(QString::number(i), this);
         button->resize(80,80);
         button->move(100+100*((i+2)%3), 450-100*((i+2)/3));
 
