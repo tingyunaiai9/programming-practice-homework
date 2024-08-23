@@ -33,6 +33,8 @@
 
 **/.vs/
 **/x64/
+**/build/
+*.user
 
 # homework and report
 *.docx
