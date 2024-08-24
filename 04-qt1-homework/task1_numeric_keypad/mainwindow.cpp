@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     button->setStyleSheet(
         "QPushButton {"
         "    background-color: #D3D3D3;"
+        "    border-style: outset;"
         "}"
         "QPushButton:hover {"
         "    background-color: #A9A9A9;"  // 深灰色

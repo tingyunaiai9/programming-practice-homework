@@ -24,6 +24,7 @@ Dialog::Dialog(QWidget *parent)
     celsiusDial->setFixedSize(200, 200);
     QLCDNumber *celsiusLcd = new QLCDNumber;
     celsiusLcd->setFixedSize(200, 50);
+    celsiusLcd->display(0);
 
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->addWidget(celsiusDial);
@@ -38,6 +39,7 @@ Dialog::Dialog(QWidget *parent)
     fahrenheitDial->setFixedSize(200, 200);
     QLCDNumber *fahrenheitLcd = new QLCDNumber;
     fahrenheitLcd->setFixedSize(200, 50);
+    fahrenheitLcd->display(32);
 
     vbox = new QVBoxLayout;
     vbox->addWidget(fahrenheitDial);
