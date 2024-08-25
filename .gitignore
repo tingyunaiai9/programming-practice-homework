@@ -31,12 +31,14 @@
 *.out
 *.app
 
+# homework and report
+*.docx
+*.pdf
+*.zip
+
 **/.vs/
 **/x64/
 **/build/
 *.user
 
-# homework and report
-*.docx
-*.pdf
-*.zip
+!**/bin/*
