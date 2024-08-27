@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    ui->inputLineEdit->installEventFilter(this);
+    ui->inputLineEdit->setPlaceholderText("请输入文字");
 }
 
 MainWindow::~MainWindow()
@@ -19,16 +22,25 @@ MainWindow::~MainWindow()
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj == ui->inputLineEdit) {
-        if (event->type() == QEvent::KeyPress) {
+    if (obj == ui->inputLineEdit)
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
             QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-            qDebug() << "Ate key press" << keyEvent->key();
-            return true;
-        } else {
-            return QMainWindow::eventFilter(obj, event);
+            if (keyEvent->key() == Qt::Key_Enter ||
+                keyEvent->key() == Qt::Key_Return)
+            {
+                QString text = ui->inputLineEdit->text();
+                if (!text.isEmpty())
+                {
+                    ui->outputTextEdit->append(text);
+                    ui->inputLineEdit->clear();
+                }
+
+                return true;
+            }
         }
-    } else {
-        // pass the event on to the parent class
-        return QMainWindow::eventFilter(obj, event);
     }
+
+    return QMainWindow::eventFilter(obj, event);
 }
